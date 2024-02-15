@@ -37,8 +37,23 @@ const traffic = [];
 const roadBorders = world.roadBorders.map((s) => [s.p1, s.p2]);
 
 animate();
+/*
+function save() {
+  localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+}
+edited save function below, so it can roll out with base functionality
+*/
 
 function save() {
+  const element = document.createElement("a");
+  element.setAttribute(
+    "href",
+    "data:application/json;charset=utf-8," +
+      encodeURIComponent(JSON.stringify(bestCar.brain))
+  );
+  const fileName = "bestBrain.json";
+  element.setAttribute("download", fileName);
+  element.click();
   localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
 }
 

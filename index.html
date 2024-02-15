@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<head>
-    <title>Self-driving car - No libraries</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <title>Self-driving car</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <canvas id="carCanvas"></canvas>
     <div id="verticalButtons">
-        <button onclick="save()">💾</button>
-        <button onclick="discard()">🗑️</button>
+      <button onclick="save()">💾</button>
+      <button onclick="discard()">🗑️</button>
     </div>
     <div>
-        <canvas id="networkCanvas"></canvas>
-        <canvas id="miniMapCanvas"></canvas>
+      <canvas id="networkCanvas"></canvas>
+      <canvas id="miniMapCanvas"></canvas>
     </div>
 
     <script src="car-project/js/world.js"></script>
@@ -52,5 +53,18 @@
     <script src="controls.js"></script>
     <script src="car.js"></script>
     <script src="main.js"></script>
-</body>
+
+    <script>
+      const bestBrain = localStorage.getItem("bestBrain");
+      if (!bestBrain) {
+        fetch('./car-project/saves/bestBrain.json')
+          .then(response => response.json())
+          .then(data => {
+            const bestbrain = data;
+            localStorage.setItem("bestBrain", JSON.stringify(bestbrain));
+          })
+          .catch(error => console.error('Error loading bestbrain.json:', error));
+      }
+    </script>
+  </body>
 </html>
