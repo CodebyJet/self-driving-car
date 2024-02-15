@@ -3,8 +3,28 @@
   <head>
     <title>Self-driving car</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+
   </head>
   <body>
+    <div class="container" id="confirmationContainer">
+      <div>
+        <h1>Hi!</h1>
+        <h3>Thank you for checking this out!</h3>
+        <p>
+          It is still a <span id="importantInfo"> work in progress</span>, but please do check out what roughly
+          you will be able to do when it's completed. This will be updated as I
+          upgrade it.
+        </p>
+        <p>
+          Eventually you will be able to <span id="importantInfo">fully design</span> your own world for the <span id="importantInfo">AI</span> to drive
+          around in or even upload real-life street data and convert it, like I
+          did in this example from street data of Manchester.
+        </p>
+        <p>To the right will be the car driving through the world. The left shows how the car makes it's decisions as it drives, it uses it's "sensors" to guide it. The yellow lines go black when it would make a collision and it works out the best route to take. Theres a handy mini-Map showing where you are also.</p>
+      </div>
+      <button onclick="acceptAndRun()">I Understand</button>
+    </div>
     <canvas id="carCanvas"></canvas>
     <div id="verticalButtons">
       <button onclick="save()">💾</button>
@@ -52,18 +72,29 @@
     <script src="utils.js"></script>
     <script src="controls.js"></script>
     <script src="car.js"></script>
-    <script src="main.js"></script>
 
     <script>
+function acceptAndRun() {
+        const confirmationContainer = document.getElementById("confirmationContainer");
+        confirmationContainer.parentNode.removeChild(confirmationContainer);
+        // Load and execute "main.js"
+        
+        const script = document.createElement("script");
+        script.src = "main.js";
+        document.head.appendChild(script);
+      }
+
       const bestBrain = localStorage.getItem("bestBrain");
       if (!bestBrain) {
-        fetch('./car-project/saves/bestBrain.json')
-          .then(response => response.json())
-          .then(data => {
+        fetch("./car-project/saves/bestBrain.json")
+          .then((response) => response.json())
+          .then((data) => {
             const bestbrain = data;
             localStorage.setItem("bestBrain", JSON.stringify(bestbrain));
           })
-          .catch(error => console.error('Error loading bestbrain.json:', error));
+          .catch((error) =>
+            console.error("Error loading bestbrain.json:", error)
+          );
       }
     </script>
   </body>
