@@ -63,7 +63,8 @@
     <script src="car-project/js/primitives/polygon.js"></script>
     <script src="car-project/js/primitives/envelope.js"></script>
 
-    <script src="car-project/saves/Manchester.world"></script>
+    <script src="saves/Manchester.world"></script>
+    <script src="saves/right_hand_rule.car"></script>
 
     <script src="visualizer.js"></script>
     <script src="miniMap.js"></script>
@@ -86,7 +87,7 @@ function acceptAndRun() {
 
       const bestBrain = localStorage.getItem("bestBrain");
       if (!bestBrain) {
-        fetch("./car-project/saves/bestBrain.json")
+        fetch("saves/right_hand_rule.car")
           .then((response) => response.json())
           .then((data) => {
             const bestbrain = data;
